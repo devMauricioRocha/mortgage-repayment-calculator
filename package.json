@@ -1,0 +1,11 @@
+{
+  "name": "Calculadora de Hipotéca",
+  "version": "1.0.0",
+  "devDependencies": {
+    "tailwindcss": "^3.4.7"
+  },
+  "scripts":{
+    "build:css": "npx tailwindcss -i src/input.css -o src/output.css --watch",
+    "producao:css": "npx tailwindcss -i src/input.css -o dist/output.css --minify"
+  }
+}

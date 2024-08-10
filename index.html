@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="./dist/output.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+    rel="stylesheet">
+  <title>Frontend Mentor | Mortgage repayment calculator</title>
+  <style>
+    input::-webkit-inner-spin-button,
+    input::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input {
+      -moz-appearance: textfield;
+    }
+  </style>
+</head>
+
+<body class="font-sans bg-slate-100 w-full h-screen lg:flex justify-center items-center">
+
+  <main class="w-full max-w-[900px] bg-white lg:flex rounded-2xl shadow-lg">
+    <div class="basis-6/12 lg:p-8 p-4 pb-8">
+
+      <div class="flex flex-col items-start lg:flex-row lg:justify-between lg:items-center mb-8">
+        <h1 class="text-2xl font-bold pb-1 lg:pb-0">Calculadora de Hipoteca</h1>
+        <button id="btn-clear"
+          class="text-sm hover:underline underline lg:no-underline text-slate-700 lg:hover:text-red-500">Limpar
+        </button>
+      </div>
+
+      <form>
+        <div class="mb-4">
+          <label for="amount" class="text-slate-700">Valor da Hipoteca</label>
+          <div class="border relative border-slate-700 rounded-lg mt-2 w-full">
+            <span class="absolute py-2 px-4 bg-slate-200 font-bold rounded-l-lg">R$</span>
+            <input type="number" id="input-amount" placeholder="Ex: 300000"
+              class="w-full py-2 pl-14 outline-none rounded-lg text-inherit"
+              autofocus oninput="formatNumber(this)"
+              >
+          </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-4 mb-4">
+          <div>
+            <label for="amount" class="text-slate-700">Prazo de Hipoteca</label>
+            <div class="border relative border-slate-700 rounded-lg mt-2 w-full">
+              <span class="absolute py-2 px-4 bg-slate-200 font-bold rounded-r-lg right-0">anos</span>
+              <input type="number" id="input-year" placeholder="Ex: 25"
+                class="w-full py-2 lg:pl-2 pl-4 pr-16 outline-none rounded-lg text-inherit">
+            </div>
+          </div>
+
+          <div>
+            <label for="amount" class="text-slate-700">Taxa de Hipoteca</label>
+            <div class="border relative border-slate-700 rounded-lg mt-2 w-full">
+              <span class="absolute py-2 px-4 bg-slate-200 font-bold rounded-r-lg right-0">%</span>
+              <input type="number" step="0.01" placeholder="Ex: 5.25" id="input-porcentagem"
+                class="w-full py-2 lg:pl-2 pl-4 pr-10 outline-none rounded-lg text-inherit">
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:mb-8 mb-5">
+          <p class="text-slate-700">Tipo de Hipoteca</p>
+
+          <div class="relative flex border mt-2 border-slate-700 py-2 px-4 rounded-lg">
+            <label for="repayment"
+              class="absolute w-4 h-4 border border-slate-800  rounded-full top-2/4 -translate-y-2/4 cursor-pointer"></label>
+            <input type="radio" name="type" id="repayment" class="pointer-events-none opacity-0">
+            <p class="font-bold pl-4">Reembolso</p>
+          </div>
+
+          <div class="relative flex border mt-2 border-slate-700 py-2 px-4 rounded-lg">
+            <label for="interest"
+              class="absolute w-4 h-4 border border-slate-800 rounded-full top-2/4 -translate-y-2/4 cursor-pointer"></label>
+            <input type="radio" name="type" id="interest" class="pointer-events-none opacity-0">
+            <p class="font-bold pl-4">Somente Juros</p>
+          </div>
+
+        </div>
+
+        <button id="btn-calc"
+          class="flex justify-center lg:mx-0 mx-auto rounded-full py-4 lg:px-8 w-full lg:w-auto bg-lime-400 font-bold lg:hover:bg-lime-500">
+          <img src="./assets/images/icon-calculator.svg" alt="" class="pr-2">
+          Calcular Reembolsos
+        </button>
+      </form>
+    </div>
+
+    <div id="resultados" class="bg-slate-700 basis-6/12 lg:p-8 px-4 py-8 lg:rounded-bl-[56px] lg:rounded-r-2xl lg:max-w-[50%]">
+
+      <div class="flex justify-center items-center flex-col w-full h-full">
+        <img src="./assets/images/illustration-empty.svg" alt="">
+        <h2 class="font-bold text-white text-2xl my-4">Resultados mostrados aqui</h2>
+        <p class="text-slate-400 text-sm text-center">Preencha o formulário e clique em “calcular pagamentos” para ver
+          quais seriam seus pagamentos mensais.</p>
+      </div>
+
+      <div class="hidden">
+        <div class="mb-8">
+          <h2 class="font-bold text-white text-2xl mb-4">Seus resultados</h2>
+          <p class="text-slate-400 text-sm">Seus resultados são mostrados abaixo com base nas informações que você
+            forneceu. Para ajustar os resultados, edite o formulário e clique novamente em “calcular reembolsos”.</p>
+        </div>
+
+        <div class="bg-slate-800 px-6 py-8 rounded-lg border-t-4 shadow-lg border-t-lime-300">
+          <div class="border-b border-b-slate-500 pb-6 mb-6">
+            <p class="text-slate-400 text-sm mb-4">Seus pagamentos mensais</p>
+            <h2 id="pg-mensais" class="text-lime-300 lg:text-5xl text-4xl font-bold truncate">R$ 1.797,743</h2>
+          </div>
+
+          <div>
+            <p class="text-slate-400 mb-2 text-sm">Total que você pagará ao longo do prazo</p>
+            <h3 id="pg-total" class="text-white text-xl font-semibold">R$ 539.322,944</h3>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="./src/index.js"></script>
+</body>
+
+</html>
