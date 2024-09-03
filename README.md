@@ -32,13 +32,13 @@ Para rodar este projeto localmente, siga estes passos:
 1. **Clone o Repositório:**
 
     ```bash
-    git clone https://github.com/seu-usuario/nome-do-repositorio.git
+    git clone https://github.com/devMauricioRocha/mortgage-repayment-calculator.git
     ```
 
 2. **Navegue até o Diretório do Projeto:**
 
     ```bash
-    cd nome-do-repositorio
+    cd mortgage-repayment-calculator
     ```
 
 3. **Instale as Dependências:**
